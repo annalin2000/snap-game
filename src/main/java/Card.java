@@ -1,4 +1,4 @@
-package snap;
+package main.java;
 
 public class Card {
     private String suit;
