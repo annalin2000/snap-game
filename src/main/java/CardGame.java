@@ -6,8 +6,8 @@ import java.util.Comparator;
 
 
 public class CardGame {
-    private String name;
-    private ArrayList<Card> deckOfCards;
+    private final String name;
+    private final ArrayList<Card> deckOfCards;
 
 
     public CardGame(String name) {
@@ -25,11 +25,16 @@ public class CardGame {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
     public ArrayList<Card> getDeck() {
         return deckOfCards;
     }
 
     public Card dealCard() {
+        if (deckOfCards.isEmpty()) return null;
         return deckOfCards.remove(0);
     }
 
@@ -38,15 +43,15 @@ public class CardGame {
         return deckOfCards;
     }
 
+
     public ArrayList<Card> sortDeckIntoSuits() {
-        deckOfCards.sort(Comparator.comparing(Card::getSuit).thenComparing(Card::getValue));
+        deckOfCards.sort(Comparator.comparing(Card::getSuit)
+                .thenComparing(Card::getValue));
         return deckOfCards;
     }
-
 
     public ArrayList<Card> shuffleDeck() {
         Collections.shuffle(deckOfCards);
         return deckOfCards;
     }
-
 }
