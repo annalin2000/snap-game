@@ -1,6 +1,9 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 
 public class CardGame {
     private String name;
@@ -25,4 +28,25 @@ public class CardGame {
     public ArrayList<Card> getDeck() {
         return deckOfCards;
     }
+
+    public Card dealCard() {
+        return deckOfCards.remove(0);
+    }
+
+    public ArrayList<Card> sortDeckInNumberOrder() {
+        deckOfCards.sort(Comparator.comparing(Card::getValue));
+        return deckOfCards;
+    }
+
+    public ArrayList<Card> sortDeckIntoSuits() {
+        deckOfCards.sort(Comparator.comparing(Card::getSuit).thenComparing(Card::getValue));
+        return deckOfCards;
+    }
+
+
+    public ArrayList<Card> shuffleDeck() {
+        Collections.shuffle(deckOfCards);
+        return deckOfCards;
+    }
+
 }
