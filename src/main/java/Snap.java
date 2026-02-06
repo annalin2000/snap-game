@@ -1,19 +1,23 @@
 package main.java;
+import java.util.Scanner;
 
 public class Snap extends CardGame {
 
-    public void CardGame(String name) {
+    public Snap(String name) {
         super(name);
-        this.name = name;
     }
 
 
+    Scanner scanner = new Scanner(System.in);
 
 
 
 
-    public play() {
-        return
+
+
+
+    public void play() {
+        shuffleDeck();
     }
 }
 

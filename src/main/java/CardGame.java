@@ -43,7 +43,6 @@ public class CardGame {
         return deckOfCards;
     }
 
-
     public ArrayList<Card> sortDeckIntoSuits() {
         deckOfCards.sort(Comparator.comparing(Card::getSuit)
                 .thenComparing(Card::getValue));
