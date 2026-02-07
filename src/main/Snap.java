@@ -1,12 +1,11 @@
-package main.java;
+package main;
 import java.util.Scanner;
 
 public class Snap extends CardGame {
 
-    public Snap(String name) {
-        super(name);
+    public Snap() {
+        super("Snap");
     }
-
 
     Scanner scanner = new Scanner(System.in);
 
@@ -16,8 +15,6 @@ public class Snap extends CardGame {
 
 
 
-    public void play() {
-        shuffleDeck();
-    }
+
 }
 
