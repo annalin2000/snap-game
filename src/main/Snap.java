@@ -2,10 +2,13 @@ package main;
 import java.util.Scanner;
 
 public class Snap extends CardGame {
-    private Player p1;
-    private Player p2;
+
+    private final Player p1;
+    private final Player p2;
+
     private Card previousCard;
     private Card currentCard;
+
     Scanner scanner = new Scanner(System.in);
 
     public Snap(Player p1, Player p2) {
@@ -17,11 +20,9 @@ public class Snap extends CardGame {
     public void play() {
         shuffleDeck();
         System.out.println("Welcome to Snap Game");
-        System.out.println("Each turn is random!");
         System.out.println("Press ENTER to deal a card.");
 
         boolean gameInProgress = true;
-
         boolean isPlayerOneTurn = Math.random() < 0.5;
 
         if (isPlayerOneTurn) {
@@ -34,44 +35,54 @@ public class Snap extends CardGame {
 
         while (gameInProgress) {
 
-            if (isPlayerOneTurn) {
-                System.out.println();
-                System.out.println(p1.getName() + "'s turn - press ENTER:");
-            } else {
-                System.out.println();
-                System.out.println(p2.getName() + "'s turn - press ENTER:");
-            }
-
+            Player currentPlayer = isPlayerOneTurn ? p1 : p2;
+            System.out.println();
+            System.out.println(currentPlayer.getName() + "'s turn - press ENTER:");
             scanner.nextLine();
 
             currentCard = dealCard();
+
+            if (currentCard == null) {
+                System.out.println("No more cards! Game ends in a draw.");
+                break;
+            }
+
             System.out.println("Card: " + currentCard);
 
             if (previousCard == null) {
                 previousCard = currentCard;
-                if (playerOneTurn) {
-                    playerOneTurn = false;
-                } else {
-                    playerOneTurn = true;
-                }
+                isPlayerOneTurn = !isPlayerOneTurn;
+                continue;
             }
 
-            else if (previousCard.getSymbol().equals(currentCard.getSymbol())) {
-                System.out.println("SNAP! You win 🎉");
-                gameInProgress = false;
-            }
-            else {
-                previousCard = currentCard;
+            if (previousCard.getSymbol().equals(currentCard.getSymbol())) {
+
+                System.out.println("SNAP opportunity! Type 'snap' within 2 seconds!");
+
+                long startTime = System.currentTimeMillis();
+                String input = scanner.nextLine();
+                long endTime = System.currentTimeMillis();
+
+                boolean typedSnap = input.trim().equalsIgnoreCase("snap");
+                boolean inTime = (endTime - startTime) <= 2000;
+
+                if (typedSnap && inTime) {
+                    System.out.println("SNAP! " + currentPlayer.getName() + " wins 🎉");
+                } else {
+                    System.out.println("Too slow or wrong word!");
+                    System.out.println(currentPlayer.getName() + " loses 😬");
                 }
+
+                gameInProgress = false;
+
+            } else {
+                previousCard = currentCard;
+                isPlayerOneTurn = !isPlayerOneTurn;
             }
         }
-
-
-
-
-
-
-
-
+    }
 }
+
+
+
 

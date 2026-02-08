@@ -12,7 +12,7 @@ public class Main {
         System.out.print("Enter Player 2 name: ");
         Player p2 = new Player(scanner.nextLine());
 
-        Snap snap = new Snap();
+        Snap snap = new Snap(p1, p2);
         snap.play();
     }
 }
