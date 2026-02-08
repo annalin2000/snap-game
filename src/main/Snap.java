@@ -71,9 +71,6 @@ public class Snap extends CardGame {
                     if(!typedSnap) {
                         System.out.println("Wrong word! You must type 'snap'");
                     }
-
-
-                    
                     if (!inTime) {
                         System.out.println("Too slow! You took more than 2 seconds");
                     }
