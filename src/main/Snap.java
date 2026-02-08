@@ -16,12 +16,31 @@ public class Snap extends CardGame {
 
     public void play() {
         shuffleDeck();
+        System.out.println("Welcome to Snap Game");
+        System.out.println("Each turn is random!");
         System.out.println("Press ENTER to deal a card.");
 
         boolean gameInProgress = true;
+
+        boolean isPlayerOneTurn = Math.random() < 0.5;
+
+        if (isPlayerOneTurn) {
+            System.out.println(p1.getName() + " starts!");
+        } else {
+            System.out.println(p2.getName() + " starts!");
+        }
+
         previousCard = null;
 
         while (gameInProgress) {
+
+            if (isPlayerOneTurn) {
+                System.out.println();
+                System.out.println(p1.getName() + "'s turn - press ENTER:");
+            } else {
+                System.out.println();
+                System.out.println(p2.getName() + "'s turn - press ENTER:");
+            }
 
             scanner.nextLine();
 
@@ -30,6 +49,11 @@ public class Snap extends CardGame {
 
             if (previousCard == null) {
                 previousCard = currentCard;
+                if (playerOneTurn) {
+                    playerOneTurn = false;
+                } else {
+                    playerOneTurn = true;
+                }
             }
 
             else if (previousCard.getSymbol().equals(currentCard.getSymbol())) {
