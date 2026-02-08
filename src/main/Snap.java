@@ -13,7 +13,31 @@ public class Snap extends CardGame {
     public void play() {
         shuffleDeck();
         System.out.println("Press ENTER to deal a card.");
-    }
+
+        boolean gameInProgress = true;
+        previousCard = null;
+
+        while (gameInProgress) {
+
+            scanner.nextLine();
+
+            currentCard = dealCard();
+            System.out.println("Card: " + currentCard);
+
+            if (previousCard == null) {
+                previousCard = currentCard;
+            }
+
+            else if (previousCard.getSymbol().equals(currentCard.getSymbol())) {
+                System.out.println("SNAP! You win 🎉");
+                gameInProgress = false;
+            }
+            else {
+                previousCard = currentCard;
+                }
+            }
+        }
+
 
 
 
