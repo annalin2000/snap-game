@@ -67,7 +67,17 @@ public class Snap extends CardGame {
                     System.out.println("SNAP! " + currentPlayer.getName() + " wins 🎉");
                 } else {
                     System.out.println();
-                    System.out.println("Too slow or wrong word!");
+
+                    if(!typedSnap) {
+                        System.out.println("Wrong word! You must type 'snap'");
+                    }
+
+
+                    
+                    if (!inTime) {
+                        System.out.println("Too slow! You took more than 2 seconds");
+                    }
+
                     System.out.println(currentPlayer.getName() + " loses 😬");
                 }
 
