@@ -19,7 +19,6 @@ public class Snap extends CardGame {
         this.p2 = p2;
     }
 
-
     public void play() {
         shuffleDeck();
         System.out.println("Welcome to Snap Game. Press ENTER to deal a card.");
@@ -55,31 +54,33 @@ public class Snap extends CardGame {
                 System.out.println();
                 System.out.println("SNAP opportunity! Type 'snap' within 2 seconds!");
 
-                long startTime = System.currentTimeMillis();
-                String input = scanner.nextLine();
-                long endTime = System.currentTimeMillis();
+                final String[] input = { null };
 
-                boolean typedSnap = input.trim().equalsIgnoreCase("snap");
-                boolean inTime = (endTime - startTime) <= SNAP_TIME_LIMIT_MS;
+                Thread inputThread = new Thread(() -> {
+                    input[0] = scanner.nextLine();
+                });
 
-                if (typedSnap && inTime) {
-                    System.out.println();
-                    System.out.println("SNAP! " + currentPlayer.getName() + " wins 🎉");
+                inputThread.start();
+
+                try {
+                    inputThread.join(2000);
+                } catch (InterruptedException e) {
+                }
+
+                if (input[0] == null) {
+                    System.out.println("\nToo slow! You took more than 2 seconds ⏱️");
+                    System.out.println(currentPlayer.getName() + " loses 😬");
+                    return;
+                }
+
+                if (input[0].equalsIgnoreCase("snap")) {
+                    System.out.println("\nSNAP! " + currentPlayer.getName() + " wins 🎉");
                 } else {
-                    System.out.println();
-
-                    if(!typedSnap) {
-                        System.out.println("Wrong word! You must type 'snap'");
-                    }
-                    if (!inTime) {
-                        System.out.println("Too slow! You took more than 2 seconds");
-                    }
-
+                    System.out.println("\nWrong word! You must type 'snap'");
                     System.out.println(currentPlayer.getName() + " loses 😬");
                 }
 
                 return;
-
             } else {
                 previousCard = currentCard;
                 isPlayerOneTurn = !isPlayerOneTurn;
