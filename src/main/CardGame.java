@@ -2,7 +2,6 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 
 public class CardGame {
@@ -39,15 +38,17 @@ public class CardGame {
     }
 
     public ArrayList<Card> sortDeckInNumberOrder() {
-        deckOfCards.sort(Comparator.comparing(Card::getValue));
+        Collections.sort(deckOfCards, new SortCardByValue());
         return deckOfCards;
     }
 
+
     public ArrayList<Card> sortDeckIntoSuits() {
-        deckOfCards.sort(Comparator.comparing(Card::getSuit)
-                .thenComparing(Card::getValue));
+        Collections.sort(deckOfCards, new SortCardBySuitThenValue());
         return deckOfCards;
     }
+
+
 
     public ArrayList<Card> shuffleDeck() {
         Collections.shuffle(deckOfCards);
