@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void printInstructions() {
-        System.out.println("\n=== HOW TO PLAY SNAP ===");
+        System.out.println("\n=== HOW TO PLAY SNAP ====");
         System.out.println("1. Players take turns pressing ENTER to deal a card.");
         System.out.println("2. Watch the symbols of the cards carefully.");
         System.out.println("3. If two cards in a row have the same symbol (i.e. two Kings, two 7s), it's SNAP!");
@@ -52,11 +52,11 @@ public class Main {
                 System.out.print("\nDo you want to play again? (y/n): ");
                 String answer = scanner.nextLine().trim().toLowerCase();
 
-                if (answer.equals("y")) {
+                if (answer.equals("y".trim())) {
                     playAgain = true;
                     System.out.println();
                     break;
-                } else if (answer.equals("n")) {
+                } else if (answer.equals("n".trim())) {
                     playAgain = false;
                     System.out.println();
                     break;
