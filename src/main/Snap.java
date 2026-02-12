@@ -6,14 +6,13 @@ import java.util.Scanner;
 // Used for time limited input, threads and timeout
 import java.util.concurrent.*;
 
-
 // Snap game class that extends CardGame
 public class Snap extends CardGame {
 
     private static final int SNAP_TIMEOUT_SECONDS = 2;
 
     // Scanner for user input
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
 
     // Stores the previously dealt card
     private Card previousCard;
@@ -21,25 +20,40 @@ public class Snap extends CardGame {
     // Stores the currently dealt card
     private Card currentCard;
 
-    public Snap() {
+    public Snap(Scanner scanner) {
         super("Snap");
+        this.scanner = scanner;
     };
 
-    // Constructor: creates a Snap game with two players
-    public Snap(Player firstPlayer, Player secondPlayer) {
-        // Call the CardGame constructor and set the game name
-        super("Snap");
-        // Assign players to this game
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
+    private void setupPlayers() {
+
+        System.out.println("\nWelcome to Snap Game!");
+        System.out.println("Enter player names to begin.\n");
+
+        String playerOneName = "";
+        String playerTwoName = "";
+
+        while (playerOneName.isEmpty()) {
+            System.out.print("Enter Player 1 name: ");
+            playerOneName = scanner.nextLine().trim();
+        }
+
+        while (playerTwoName.isEmpty()) {
+            System.out.print("Enter Player 2 name: ");
+            playerTwoName = scanner.nextLine().trim();
+        }
+
+        firstPlayer = new Player(playerOneName);
+        secondPlayer = new Player(playerTwoName);
     }
+
 
     public void play() {
 
+        setupPlayers();
+
         // Shuffle the deck before starting the game
         shuffleDeck();
-
-        System.out.println("Welcome to Snap Game. Press ENTER to deal a card.");
 
         // Randomly decide who starts
         boolean isPlayerOneTurn = Math.random() < 0.5;
@@ -92,8 +106,6 @@ public class Snap extends CardGame {
                 } catch (TimeoutException e) {
                     System.out.println();
                     System.out.println("⏱️ Time's up! " + currentPlayer.getName() + " loses!");
-                    // Cancel the input task
-                    future.cancel(true); // force stop input task
 
                 } catch (InterruptedException e) {
                     // If the thread was interrupted, restore interrupt flag
@@ -104,11 +116,11 @@ public class Snap extends CardGame {
 
                 } finally {
                     // immediately kill thread
-                    executor.shutdownNow();
+                    executor.shutdown();
                 }
 
                 // End game after snap attempt
-                break;
+                return;
             }
             //No snap, move current card into previous card
             previousCard = currentCard;

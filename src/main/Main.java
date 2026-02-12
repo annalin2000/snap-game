@@ -4,23 +4,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static String[] getNameInputs(Scanner scanner) {
-        String playerOneName = "";
-        String playerTwoName = "";
-
-        while (playerOneName.isEmpty()) {
-            System.out.print("Enter Player 1 name: ");
-            playerOneName = scanner.nextLine();
-        }
-
-        while (playerTwoName.isEmpty()) {
-            System.out.print("Enter Player 2 name: ");
-            playerTwoName = scanner.nextLine();
-        }
-
-        return new String[]{playerOneName, playerTwoName};
-    };
-
     public static void printInstructions() {
         System.out.println("\n=== HOW TO PLAY SNAP ===");
         System.out.println("1. Players take turns pressing ENTER to deal a card.");
@@ -35,7 +18,6 @@ public class Main {
 
         // Scanner used to read input from the user
         Scanner scanner = new Scanner(System.in);
-
         boolean playAgain = true;
 
         while (playAgain) {
@@ -60,8 +42,7 @@ public class Main {
             }
 
             // Create a new Snap game using the two players
-            Snap snap = new Snap();
-            snap.takePlayerNameInputs(Main.getNameInputs(scanner));
+            Snap snap = new Snap(scanner);
 
             // Start the Snap game
             snap.play();
