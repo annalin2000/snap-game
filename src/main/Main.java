@@ -21,6 +21,16 @@ public class Main {
         return new String[]{playerOneName, playerTwoName};
     };
 
+    public static void printInstructions() {
+        System.out.println("\n=== HOW TO PLAY SNAP ===");
+        System.out.println("1. Players take turns pressing ENTER to deal a card.");
+        System.out.println("2. Watch the symbols of the cards carefully.");
+        System.out.println("3. If two cards in a row have the same symbol (i.e. two Kings, two 7s), it's SNAP!");
+        System.out.println("4. The current player has 2 seconds to type 'snap'.");
+        System.out.println("5. Type it in time to win. Too slow or wrong, you lose.");
+        System.out.println("=========================\n");
+    }
+
     public static void main(String[] args) {
 
         // Scanner used to read input from the user
