@@ -3,7 +3,6 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 public class CardGame {
     // Name of the card game
     private final String name;
@@ -11,6 +10,8 @@ public class CardGame {
     // The deck of cards used in the game
     private final ArrayList<Card> deckOfCards;
 
+    protected Player firstPlayer = new Player();
+    protected Player secondPlayer = new Player();
 
     // Constructor: creates a new card game and builds a full deck of 52 cards
     public CardGame(String name) {
@@ -61,11 +62,16 @@ public class CardGame {
         }
             return a.getSuit().compareTo( b.getSuit());
     });
-
     }
 
     // Randomly shuffles the deck of cards
     public void shuffleDeck() {
         Collections.shuffle(deckOfCards);
+    }
+
+    // Sets player names from a 2 item array
+    public void takePlayerNameInputs(String[] names) {
+        firstPlayer.setName(names[0]);
+        secondPlayer.setName(names[1]);
     }
 }

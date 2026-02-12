@@ -32,10 +32,10 @@ public class Card {
     @Override
         public String toString() {
         String suitSymbol = switch (suit) {
-            case hearts -> "♥";
-            case diamonds -> "♦";
-            case clubs -> "♣";
-            case spades -> "♠";
+            case HEARTS -> "♥";
+            case DIAMONDS -> "♦";
+            case CLUBS -> "♣";
+            case SPADES -> "♠";
         };
         return suitSymbol + symbol;
     }

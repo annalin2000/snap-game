@@ -11,9 +11,6 @@ import java.util.concurrent.*;
 public class Snap extends CardGame {
 
     private static final int SNAP_TIMEOUT_SECONDS = 2;
-    // Two players taking part in the game
-    private final Player p1;
-    private final Player p2;
 
     // Scanner for user input
     private final Scanner scanner = new Scanner(System.in);
@@ -24,13 +21,17 @@ public class Snap extends CardGame {
     // Stores the currently dealt card
     private Card currentCard;
 
+    public Snap() {
+        super("Snap");
+    };
+
     // Constructor: creates a Snap game with two players
-    public Snap(Player p1, Player p2) {
+    public Snap(Player firstPlayer, Player secondPlayer) {
         // Call the CardGame constructor and set the game name
         super("Snap");
         // Assign players to this game
-        this.p1 = p1;
-        this.p2 = p2;
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
     }
 
     public void play() {
@@ -42,14 +43,14 @@ public class Snap extends CardGame {
 
         // Randomly decide who starts
         boolean isPlayerOneTurn = Math.random() < 0.5;
-        System.out.println((isPlayerOneTurn ? p1.getName() : p2.getName()) + " starts first!");
+        System.out.println((isPlayerOneTurn ? firstPlayer.getName() : secondPlayer.getName()) + " starts first!");
 
         // No card has been dealt yet
         previousCard = null;
 
         while (true) {
             // Decide whose turn it is
-            Player currentPlayer = isPlayerOneTurn ? p1 : p2;
+            Player currentPlayer = isPlayerOneTurn ? firstPlayer : secondPlayer;
 
             System.out.println();
             System.out.print(currentPlayer.getName() + "'s turn - Press ENTER to deal a card");

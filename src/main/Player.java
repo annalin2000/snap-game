@@ -4,7 +4,9 @@ package main;
 public class Player {
 
     // Stores the player's name
-    private final String name;
+    private String name;
+
+    public Player() {};
 
     // Constructor: creates a Player with the given name
     public Player(String name) {
@@ -14,5 +16,9 @@ public class Player {
     // Getter: returns the player's name
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
