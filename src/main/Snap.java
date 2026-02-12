@@ -1,6 +1,7 @@
 package main;
 
 // Used to read input from the keyboard
+import java.io.IOException;
 import java.util.Scanner;
 
 // Snap game class that extends CardGame
@@ -42,18 +43,18 @@ public class Snap extends CardGame {
         String playerTwoName = "";
 
         while (playerOneName.isEmpty()) {
-            System.out.print("\nEnter Player 1 name: ");
+            System.out.print("Enter Player 1 name: ");
             playerOneName = scanner.nextLine().trim();
             if (playerOneName.isEmpty()) {
-                System.out.println("Please enter a valid name.");
+                System.out.println("Please enter a valid name.\n");
             }
         }
 
         while (playerTwoName.isEmpty()) {
-            System.out.print("\nEnter Player 2 name: ");
+            System.out.print("Enter Player 2 name: ");
             playerTwoName = scanner.nextLine().trim();
             if (playerTwoName.isEmpty()) {
-                System.out.println("Please enter a valid name.");
+                System.out.println("Please enter a valid name.\n");
             }
         }
 
@@ -74,7 +75,10 @@ public class Snap extends CardGame {
 
                 Thread.sleep(20);
             }
-        } catch (Exception ignored) {
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return null;
@@ -108,7 +112,7 @@ public class Snap extends CardGame {
 
             // If there are no more cards, end the game
             if (currentCard == null) {
-                System.out.println("No more cards! Game ends in a draw.");
+                System.out.println("\nNo more cards! Game ends in a draw.");
                 break;
             }
             // Show the dealt card

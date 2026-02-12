@@ -18,6 +18,7 @@ public class Main {
 
         // Scanner used to read input from the user
         Scanner scanner = new Scanner(System.in);
+
         boolean playAgain = true;
 
         while (playAgain) {
