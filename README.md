@@ -4,7 +4,6 @@ A simple 2 player Snap card game built in Java and played in the command line.
 
 Players take turns drawing cards. If two consecutive cards share the same symbols (e.g. two Kings or two 7s), the current player must type 'snap' within 2 seconds to win.
 
----
 
 ## 🎮  How to Play
 
@@ -19,7 +18,6 @@ Players take turns drawing cards. If two consecutive cards share the same symbol
 7. If the deck runs out without a match, the game ends in a draw.
 8. After each game, enter 'y' to play again or 'n' to exit.
 
----
 
 ## 🚀 Getting Started
 
@@ -51,7 +49,6 @@ java -cp out main.Main
 
 Follow the on screen prompts to begin playing.
 
----
 
 ## 🤝 Contributing
 
@@ -79,7 +76,6 @@ git push origin feature/your-feature-name
 4. Open Pull Request
    - Go to your fork on GitHub and click Compare & Pull Request.
    - Explain clearly what you changed and why.
----
 
 
 ## 💬 Feedback
