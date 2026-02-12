@@ -3,15 +3,11 @@ package main;
 // Used to read input from the keyboard
 import java.util.Scanner;
 
-// Used for time limited input, threads and timeout
-import java.util.concurrent.*;
-
 // Snap game class that extends CardGame
 public class Snap extends CardGame {
 
     private static final int SNAP_TIMEOUT_SECONDS = 2;
 
-    // Scanner for user input
     private final Scanner scanner;
 
     // Stores the previously dealt card
@@ -47,6 +43,24 @@ public class Snap extends CardGame {
         secondPlayer = new Player(playerTwoName);
     }
 
+
+    private String readLineWithTimeoutSeconds(int seconds) {
+        long end = System.currentTimeMillis() + (seconds * 1000L);
+
+        try {
+            while (System.currentTimeMillis() < end) {
+
+                if (System.in.available() > 0) {
+                    return scanner.nextLine();
+                }
+
+                Thread.sleep(20);
+            }
+        } catch (Exception ignored) {
+        }
+
+        return null;
+    }
 
     public void play() {
 
@@ -87,40 +101,21 @@ public class Snap extends CardGame {
                 System.out.println();
                 System.out.println("SNAP! Type 'snap' within " + SNAP_TIMEOUT_SECONDS + " seconds!");
 
-                //Run input on another thread to allow a time limit
-                ExecutorService executor = Executors.newSingleThreadExecutor();
-                Future<String> future = executor.submit(scanner::nextLine);
+                String input = readLineWithTimeoutSeconds(SNAP_TIMEOUT_SECONDS);
 
-                try {
-                    // Wait for input up to 2 seconds
-                    String input = future.get(SNAP_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-
-                    if ("snap".equalsIgnoreCase(input.trim())) {
-                        System.out.println();
-                        System.out.println("🎉 SNAP! " + currentPlayer.getName() + " wins!");
-                    } else {
-                        System.out.println();
-                        System.out.println("Wrong word! " + currentPlayer.getName() + " loses!");
-                    }
-
-                } catch (TimeoutException e) {
+                if (input == null) {
                     System.out.println();
                     System.out.println("⏱️ Time's up! " + currentPlayer.getName() + " loses!");
-
-                } catch (InterruptedException e) {
-                    // If the thread was interrupted, restore interrupt flag
-                    Thread.currentThread().interrupt();
-
-                } catch (Exception e) {
-                    throw new IllegalStateException("Input error occurred");
-
-                } finally {
-                    // immediately kill thread
-                    executor.shutdown();
+                } else if ("snap".equalsIgnoreCase(input.trim())) {
+                    System.out.println();
+                    System.out.println("🎉 SNAP! " + currentPlayer.getName() + " wins!");
+                } else {
+                    System.out.println();
+                    System.out.println("Wrong word! " + currentPlayer.getName() + " loses!");
                 }
 
-                // End game after snap attempt
                 return;
+
             }
             //No snap, move current card into previous card
             previousCard = currentCard;

@@ -30,7 +30,7 @@ public class Card {
 
     // Converts the card object into a readable String
     @Override
-        public String toString() {
+    public String toString() {
         String suitSymbol = switch (suit) {
             case HEARTS -> "♥";
             case DIAMONDS -> "♦";

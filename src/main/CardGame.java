@@ -10,8 +10,8 @@ public class CardGame {
     // The deck of cards used in the game
     private final ArrayList<Card> deckOfCards;
 
-    protected Player firstPlayer = new Player();
-    protected Player secondPlayer = new Player();
+    protected Player firstPlayer;
+    protected Player secondPlayer;
 
     // Constructor: creates a new card game and builds a full deck of 52 cards
     public CardGame(String name) {

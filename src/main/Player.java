@@ -6,7 +6,7 @@ public class Player {
     // Stores the player's name
     private String name;
 
-    public Player() {};
+    public Player() {}
 
     // Constructor: creates a Player with the given name
     public Player(String name) {
