@@ -53,11 +53,11 @@ public class Main {
                 System.out.print("\nDo you want to play again? (y/n): ");
                 String answer = scanner.nextLine().trim().toLowerCase();
 
-                if (answer.equals("y".trim())) {
+                if (answer.trim().equals("y")) {
                     playAgain = true;
                     System.out.println();
                     break;
-                } else if (answer.equals("n".trim())) {
+                } else if (answer.trim().equals("n")) {
                     playAgain = false;
                     System.out.println();
                     break;
