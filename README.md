@@ -14,10 +14,10 @@ Players take turns drawing cards. If two consecutive cards share the same symbol
 4. The game automatically creates and shuffles the deck, then randomly selects who goes first.
 5. Players press **ENTER** to draw cards.
 6. If two consecutive cards match:
-   - Type `snap` within 2 seconds to win.
+   - Type 'snap' within 2 seconds to win.
    - Incorrect or late responses result in a loss.
 7. If the deck runs out without a match, the game ends in a draw.
-8. After each game, enter `y` to play again or `n` to exit.
+8. After each game, enter 'y' to play again or 'n' to exit.
 
 ---
 
@@ -46,7 +46,7 @@ javac -d out src/main/Main.java
 9. Run the game:
 
 ```bash
-java main.Main
+java -cp out main.Main
 ```
 
 Follow the on screen prompts to begin playing.
@@ -61,18 +61,24 @@ Follow the on screen prompts to begin playing.
 ```bash
 git clone https://github.com/<your-username>/snap-game.git
 cd snap-game
+```
+
+3. Create a Branch
+
+```bash
 git checkout -b feature/your-feature-name
 ```
 
-3. Commit, push, and open a pull request:
-
+3. Commit and push your changes
+ 
 ```bash
 git add .
-git commit -m "Brief description of your change"
+git commit -m "Clear description of your change"
 git push origin feature/your-feature-name
 ```
-4. Open a Pull Request and clearly explain your changes.
-
+4. Open Pull Request
+   - Go to your fork on GitHub and click Compare & Pull Request.
+   - Explain clearly what you changed and why.
 ---
 
 
