@@ -28,15 +28,17 @@ public class Card {
         return value;
     }
 
-    // Converts the card object into a readable String
     @Override
     public String toString() {
-        String suitSymbol = switch (suit) {
-            case HEARTS -> "♥";
-            case DIAMONDS -> "♦";
-            case CLUBS -> "♣";
-            case SPADES -> "♠";
-        };
-        return suitSymbol + symbol;
+        String left = String.format("%-2s", symbol);
+        String right = String.format("%2s", symbol);
+
+        return """
+               ┌─────────┐
+               │ %s      │
+               │    %s    │
+               │      %s │
+               └─────────┘
+               """.formatted(left, suit.getSymbol(), right);
     }
 }

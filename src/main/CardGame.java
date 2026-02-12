@@ -68,10 +68,4 @@ public class CardGame {
     public void shuffleDeck() {
         Collections.shuffle(deckOfCards);
     }
-
-    // Sets player names from a 2 item array
-    public void takePlayerNameInputs(String[] names) {
-        firstPlayer.setName(names[0]);
-        secondPlayer.setName(names[1]);
-    }
 }

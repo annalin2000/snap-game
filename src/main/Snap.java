@@ -21,10 +21,12 @@ public class Snap extends CardGame {
     // Stores the currently dealt card
     private Card currentCard;
 
-    public Snap(Scanner scanner) {
+    public Snap(Scanner scanner, Player player1, Player player2) {
         super("Snap");
         this.scanner = scanner;
-    };
+        this.firstPlayer = player1;
+        this.secondPlayer = player2;
+    }
 
     private String green(String text) {
         return GREEN + text + RESET;
@@ -34,40 +36,12 @@ public class Snap extends CardGame {
         return RED + text + RESET;
     }
 
-    private void setupPlayers() {
-
-        System.out.println("\nWelcome to Snap Game!");
-        System.out.println("Enter player names to begin.\n");
-
-        String playerOneName = "";
-        String playerTwoName = "";
-
-        while (playerOneName.isEmpty()) {
-            System.out.print("Enter Player 1 name: ");
-            playerOneName = scanner.nextLine().trim();
-            if (playerOneName.isEmpty()) {
-                System.out.println("Please enter a valid name.\n");
-            }
-        }
-
-        while (playerTwoName.isEmpty()) {
-            System.out.print("Enter Player 2 name: ");
-            playerTwoName = scanner.nextLine().trim();
-            if (playerTwoName.isEmpty()) {
-                System.out.println("Please enter a valid name.\n");
-            }
-        }
-
-        firstPlayer = new Player(playerOneName);
-        secondPlayer = new Player(playerTwoName);
-    }
-
 
     private String readLineWithTimeoutSeconds(int seconds) {
-        long end = System.currentTimeMillis() + (seconds * 1000L);
+        long endTime = System.currentTimeMillis() + (seconds * 1000L);
 
         try {
-            while (System.currentTimeMillis() < end) {
+            while (System.currentTimeMillis() < endTime) {
 
                 if (System.in.available() > 0) {
                     return scanner.nextLine();
@@ -86,8 +60,6 @@ public class Snap extends CardGame {
 
     public void play() {
 
-        setupPlayers();
-
         // Shuffle the deck before starting the game
         shuffleDeck();
 
@@ -104,7 +76,7 @@ public class Snap extends CardGame {
             Player currentPlayer = isPlayerOneTurn ? firstPlayer : secondPlayer;
 
             System.out.println();
-            System.out.print(currentPlayer.getName() + "'s turn - Press ENTER to deal a card");
+            System.out.print(currentPlayer.getName() + "'s turn - Press ENTER to deal a card: ");
             scanner.nextLine();
 
             // Deal a card from the deck
@@ -112,11 +84,12 @@ public class Snap extends CardGame {
 
             // If there are no more cards, end the game
             if (currentCard == null) {
-                System.out.println("\nNo more cards! Game ends in a draw.");
+                System.out.println("\nNo more cards! It's a draw.");
                 break;
             }
             // Show the dealt card
-            System.out.println(currentPlayer.getName() + " got card: " + currentCard);
+            System.out.println(currentPlayer.getName() + " got card:");
+            System.out.println(currentCard);
 
 
             if (previousCard != null && previousCard.getSymbol().equals(currentCard.getSymbol())) {
@@ -126,14 +99,17 @@ public class Snap extends CardGame {
 
                 String input = readLineWithTimeoutSeconds(SNAP_TIMEOUT_SECONDS);
 
-                if (input == null) {
-                    System.out.println(red("\n⏱️ Time's up! " + currentPlayer.getName() + " loses!"));
-                } else if ("snap".equalsIgnoreCase(input.trim())) {
-                    System.out.println(green("\n🎉 SNAP! " + currentPlayer.getName() + " wins!"));
+                if (input != null && input.trim().equalsIgnoreCase("snap")) {
+                    currentPlayer.addPoint();
+                    System.out.println(green("\n🎉 SNAP! " + currentPlayer.getName()
+                            + " gets 1 point! Total points: " + currentPlayer.getPoints()));
+                } else if (input == null) {
+                    System.out.println(red("\n⏱️ Time's up! No point awarded."));
                 } else {
-                    System.out.println(red("\nWrong word! " + currentPlayer.getName() + " loses!"));
+                    System.out.println(red("\nWrong word! No point awarded."));
                 }
                 return;
+
             }
             //No snap, move current card into previous card
             previousCard = currentCard;

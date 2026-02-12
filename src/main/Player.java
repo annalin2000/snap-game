@@ -4,13 +4,13 @@ package main;
 public class Player {
 
     // Stores the player's name
-    private String name;
+    private final String name;
+    private int points;
 
-    public Player() {}
 
     // Constructor: creates a Player with the given name
     public Player(String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 
     // Getter: returns the player's name
@@ -18,7 +18,18 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    // Add 1 point when player wins
+    public void addPoint() {
+        points++;
+    }
+
+    // Get total points
+    public int getPoints() {
+        return points;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - Points: " + points;
     }
 }
