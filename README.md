@@ -13,10 +13,11 @@ Players take turns drawing cards. If two consecutive cards share the same symbol
 4. The game automatically creates and shuffles the deck, then randomly selects who goes first.
 5. Players press **ENTER** to draw cards.
 6. If two consecutive cards match:
-   - Type 'snap' within 2 seconds to win.
-   - Incorrect or late responses result in a loss.
-7. If the deck runs out without a match, the game ends in a draw.
-8. After each game, enter 'y' to play again or 'n' to exit.
+   - Type 'snap' within 2 seconds to earn 1 point.
+   - Incorrect or late responses result in no points.
+7. The player earns 1 point for each correct Snap, and the highest score wins.
+8. f the deck runs out without a match, the round ends in a draw.
+9. After each game, enter 'y' to play again or 'n' to exit.
 
 
 ## 🚀 Getting Started
